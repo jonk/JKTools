@@ -1,5 +1,10 @@
 import sublime, sublime_plugin
 
+<<<<<<< HEAD
+=======
+found_regions = []
+
+>>>>>>> 1593a2de5bd09e7e00f8309e24e2f9672db3194a
 #Jumps down function by function and loops at bottom
 class JumpDownFuncCommand(sublime_plugin.TextCommand):
     def run(self, edit):
