@@ -18,26 +18,28 @@ class JumpDownFuncCommand(sublime_plugin.TextCommand):
             self.view.sel().clear()
             self.view.sel().add(sublime.Region(next_point))
 
-
+#Jumps up function by function and loops at top
+#Do this on modififed
 class JumpUpFuncCommand(sublime_plugin.TextCommand):
 
     func_lines = None
 
     def run(self, edit):
-        if not self.func_lines:
+        if not self.func_lines or self.view.is_dirty():
             self.func_lines = self.view.find_all(r'def \w+\(.*\):')
 
         region = self.view.sel()[0]
+        point = region.begin()
 
-        new_region = -1
+        prev_region = -1
 
         for reg in self.func_lines:
-            if reg.begin() < region.begin():
-                new_region = sublime.Region(reg.begin())
+            if reg.end() < point:
+                prev_region = sublime.Region(reg.end())
 
-        if new_region == -1:
-            new_region = sublime.Region(self.func_lines[-1].begin())
+        if prev_region == -1:
+            prev_region = sublime.Region(self.func_lines[-1].end())
 
         self.view.sel().clear()
-        self.view.sel().add(new_region)
+        self.view.sel().add(prev_region)
 
