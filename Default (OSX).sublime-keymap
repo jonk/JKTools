@@ -1,5 +1,4 @@
 [
-    {
-        "keys": ["super+alt+n"], "command": "jump_down_func"
-    }
+    {"keys": ["super+alt+n"], "command": "jump_down_func"},
+    {"keys": ["super+alt+shift+n"], "command": "jump_up_func"}
 ]
